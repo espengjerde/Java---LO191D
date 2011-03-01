@@ -1,0 +1,22 @@
+$ java -version
+java version "1.6.0_22"
+Java(TM) SE Runtime Environment (build 1.6.0_22-b04)
+Java HotSpot(TM) 64-Bit Server VM (build 17.1-b03, mixed mode)
+
+Eg måtte installere JavaDB. Dette gjorde eg ved å kjøre føljande komando i linux-terminalen:
+$ sudo apt-get install sun-javadb-client sun-java6-javadb sun-javadb-core sun-javadb-doc sun-javadb-javadoc sun-javadb-demo
+
+Deretter endra eg PATH og CLASSPATH + la til DERBY_HOME med føljande komandoar. 
+
+$export PATH=/usr/share/javadb/bin:$PATH
+$export DERBY_HOME=/usr/share/javadb
+$export CLASSPATH=.:$DERBY_HOME/lib/derbyclient.jar:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar:$DERBY_HOME/lib/derbynet.jar:$CLASSPATH
+
+Eg hadde litt problem med desse variablane. Først etter eg la dei inn i ~/.profile fungerte det å kompilere og kjøre frå gEdit (editoren eg bruker).
+
+Forelseser kan gjerne legge ut føljande lenke som brukervegleiing for installasjon på linux/Ubuntu:
+http://www.stuartellis.eu/articles/derby-javadb
+
+Eg bruker ij v.10.3 til å jobbe mot databasen (integrert terminal i gEdit).
+
+
