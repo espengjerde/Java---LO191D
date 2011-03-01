@@ -1,7 +1,6 @@
 /*Valuta.java*/
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import static javax.swing.JOptionPane.*;
