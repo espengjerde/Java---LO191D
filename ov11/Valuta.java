@@ -60,7 +60,7 @@ class Vindauge extends JFrame{
 
 
     public Liste(JList jl, DefaultListModel dlm){
-      if(dlm.getSize() == 0){    //oppretter std.liste om den ikkje er laga frå før.
+      if(dlm.isEmpty()){    //oppretter std.liste om den ikkje er laga frå før.
         dlm.addElement("Lag ny valuta");
         for(Valuta valuta : valutaListe){
           dlm.addElement(valuta);
