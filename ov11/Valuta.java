@@ -35,10 +35,9 @@ class Valuta{// extends JFrame{
   } 
 }
 class Vindauge extends JFrame{
-  private DefaultListModel fraValutaContent = new DefaultListModel();
-  private JList fraValutaListe = new JList(fraValutaContent);
-  private DefaultListModel tilValutaContent = new DefaultListModel();
-  private JList tilValutaListe = new JList(tilValutaContent);
+  private DefaultListModel valutaliste = new DefaultListModel();
+  private JList fraValutaListe = new JList(valutaliste);
+  private JList tilValutaListe = new JList(valutaliste);
   
   private JLabel svar = new JLabel("Vel ein valuta");
   private JLabel infotekst = new JLabel("Superduper valutakalkulator 2011");
@@ -48,8 +47,9 @@ class Vindauge extends JFrame{
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     add(infotekst, BorderLayout.NORTH);
     add(svar, BorderLayout.SOUTH);
-    add(new Liste(fraValutaListe, fraValutaContent), BorderLayout.WEST);
-    add(new Liste(tilValutaListe, tilValutaContent), BorderLayout.EAST);
+    
+    add(new Liste(fraValutaListe, valutaliste), BorderLayout.WEST);
+    add(new Liste(tilValutaListe, valutaliste), BorderLayout.EAST);
     pack();
   }
 
@@ -60,9 +60,11 @@ class Vindauge extends JFrame{
 
 
     public Liste(JList jl, DefaultListModel dlm){
-      dlm.addElement("Lag ny valuta");
-      for(Valuta valuta : valutaListe){
-        dlm.addElement(valuta);
+      if(dlm.getSize() == 0){    //oppretter std.liste om den ikkje er laga frå før.
+        dlm.addElement("Lag ny valuta");
+        for(Valuta valuta : valutaListe){
+          dlm.addElement(valuta);
+        }
       }
       jl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       JScrollPane rullefelt = new JScrollPane(jl);
@@ -83,13 +85,12 @@ class Vindauge extends JFrame{
         int nyEnhet = Integer.parseInt(showInputDialog("Eining for ny valuta"));
         
         Valuta nyValuta = new Valuta(nyNamn, nyKurs, nyEnhet);
-        fraValutaContent.addElement(nyValuta);
-        tilValutaContent.addElement(nyValuta);
+        valutaliste.addElement(nyValuta);
       }
 /* Rekne ut valutaforskjell */
       if(vFra > 0 && vTil > 0){
-       Valuta fraValuta = (Valuta) fraValutaContent.get(vFra);
-       Valuta tilValuta = (Valuta) tilValutaContent.get(vTil); 
+       Valuta fraValuta = (Valuta) valutaliste.get(vFra);
+       Valuta tilValuta = (Valuta) valutaliste.get(vTil); 
        
        infotekst.setText("Du har valt " + fraValuta.getNamn() + " og " + tilValuta.getNamn() + ".");
        svar.setText("Oppgi antall eingar av " + fraValuta.getNamn());
